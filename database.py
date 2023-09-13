@@ -1,10 +1,11 @@
 import mysql.connector
 
 class Database:
+    #Conexão
     def __init__(self):
         self.conn = mysql.connector.connect(host='localhost', user='root', password='', database='crud')
         self.cursor = self.conn.cursor()
-
+    #Insert
     def create(self, nome, cpf, telefone, email):
         try:
             self.cursor.execute("INSERT INTO usuario (nome, cpf, telefone, email) VALUES (%s, %s, %s, %s)", (nome, cpf, telefone, email))
@@ -12,14 +13,14 @@ class Database:
         except Exception as e:
             print(f"Erro ao criar registro: {e}")
             self.conn.rollback()
-
+    #Select
     def read(self):
         try:
             self.cursor.execute("SELECT * FROM usuario")
             return self.cursor.fetchall()
         except Exception as e:
             print(f"Erro ao ler registros: {e}")
-
+    #Update
     def update(self, id, nome, cpf, telefone, email):
         try:
             self.cursor.execute("UPDATE usuario SET nome = %s, cpf = %s, telefone = %s, email = %s WHERE id = %s", (nome, cpf, telefone, email, id))
@@ -27,7 +28,7 @@ class Database:
         except Exception as e:
             print(f"Erro ao atualizar registro: {e}")
             self.conn.rollback()
-
+    #Delete
     def delete(self, id):
         try:
             self.cursor.execute("DELETE FROM usuario WHERE id = %s", (id,))
