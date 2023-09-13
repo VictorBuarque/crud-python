@@ -1,2 +1,2 @@
 # crud-python
-Simple Crud in python using tkinter
+Simple Crud in python using tkinter and mysql
